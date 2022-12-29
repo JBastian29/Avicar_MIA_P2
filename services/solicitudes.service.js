@@ -1,26 +1,26 @@
 const boob = require('@hapi/boom')
 
-class ViajesService {
+class SolicitudesService {
     id = 0
-    viajes = []
+    solis = []
   constructor() {}
 
   async create(data) {
     this.id++;
-    const newViajes = {
+    const newSolis = {
         id: this.id,
         ...data
     }
-    this.viajes.push(newViajes);
-    return newViajes;
+    this.solis.push(newSolis);
+    return newSolis;
   }
 
   async find() {
-    return this.viajes;
+    return this.solis;
   }
 
   async findOne(id) {
-    const viajeEncontrado = this.viajes.find(item => item.id === +id);
+    const viajeEncontrado = this.solis.find(item => item.id === +id);
     if (!viajeEncontrado) {
       throw boom.notFound('product not found');
     }
@@ -28,26 +28,26 @@ class ViajesService {
   }
 
   async update(id, changes) {
-    const index = this.viajes.findIndex(item => item.id === +id);
+    const index = this.solis.findIndex(item => item.id === +id);
     if (index === -1) {
       return "Viaje con id: " + id + ", no existe"
     }
-    const new_viaje = this.viajes[index];
-    this.viajes[index] = {
+    const new_viaje = this.solis[index];
+    this.solis[index] = {
       ...new_viaje,
       ...changes
     };
-    return this.viajes[index];
+    return this.solis[index];
   }
 
   async delete(id) {
-    const index = this.viajes.findIndex(item => item.id === +id);
+    const index = this.solis.findIndex(item => item.id === +id);
     if (index === -1) {
       return "Viaje con id: " + id + ", no existe"
     }
-    this.viajes.splice(index, 1);
+    this.solis.splice(index, 1);
     return { id };
   }
 }
 
-module.exports = ViajesService;
+module.exports = SolicitudesService;

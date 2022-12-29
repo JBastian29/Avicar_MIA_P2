@@ -1,19 +1,19 @@
 const express = require('express');
 
-const ViajesService = require('../services/viajes.service');
+const ViajesService = require('../services/autos.service');
 
 const router = express.Router();
 const service = new ViajesService();
 
 router.get('/', async (req,res)=>{
-    const viajes = await service.find();
-    res.json(viajes);
+    const autos = await service.find();
+    res.json(autos);
 })
 
 router.post('/', async (req,res)=>{
     const body = req.body;
-      const newViajes = await service.create(body);
-      res.status(201).json(newViajes);
+      const newVAutos = await service.create(body);
+      res.status(201).json(newVAutos);
 })
 
 router.get('/:id',

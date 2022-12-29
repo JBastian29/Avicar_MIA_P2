@@ -7,11 +7,10 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "lint": "eslint",
-    "migrations:generate":"sequelize-cli migration:generate --name",
-    "migrations:run":"sequelize-cli db:migrate",
-    "migrations:revert":"sequelize-cli db:migrate:undo",
-    "migrations:delete":"sequelize-cli db:migrate:all"
-
+    "migrations:generate": "sequelize-cli migration:generate --name",
+    "migrations:run": "sequelize-cli db:migrate",
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:all"
   },
   "keywords": [],
   "author": "",
@@ -25,10 +24,16 @@
     "sequelize-cli": "^6.4.1"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.238.0",
+    "@aws-sdk/s3-request-presigner": "^3.238.0",
     "@hapi/boom": "^9.1.4",
+    "amazon": "^0.0.0",
+    "amazon-cognito-identity-js": "^6.1.2",
+    "aws": "^0.0.3-2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.1",
+    "express-fileupload": "^1.4.0",
     "faker": "^5.5.3",
     "joi": "^17.4.2",
     "mysql2": "^2.3.3",
