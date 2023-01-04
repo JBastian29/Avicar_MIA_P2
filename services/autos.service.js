@@ -20,9 +20,9 @@ class AutosService {
   }
 
   async findOne(id) {
-    const viajeEncontrado = this.autos.find(item => item.id === +id);
+    const viajeEncontrado = this.autos.find(item => item.id == +id);
     if (!viajeEncontrado) {
-        return "Auto con id: " + id + ", no existe"
+      return {message: "Auto con id: " + id + ", no existe"}
     }
     return viajeEncontrado;
   }
@@ -30,7 +30,7 @@ class AutosService {
   async update(id, changes) {
     const index = this.autos.findIndex(item => item.id === +id);
     if (index === -1) {
-      return "Auto con id: " + id + ", no existe"
+      return {message: "Auto con id: " + id + ", no existe"}
     }
     const new_viaje = this.autos[index];
     this.autos[index] = {
@@ -43,7 +43,7 @@ class AutosService {
   async delete(id) {
     const index = this.autos.findIndex(item => item.id === +id);
     if (index === -1) {
-      return "Auto con id: " + id + ", no existe"
+      return {message: "Auto con id: " + id + ", no existe"}
     }
     this.autos.splice(index, 1);
     return { id };

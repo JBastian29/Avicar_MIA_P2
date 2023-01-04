@@ -12,15 +12,28 @@ router.get('/', async (req,res)=>{
 
 router.post('/', async (req,res)=>{
     const body = req.body;
+    //console.log(body,'mensajito apra diferenciar')
       const newSolis = await service.create(body);
       res.status(201).json(newSolis);
 })
 
-router.get('/:id',
+router.get('/soliAuto/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const category = await service.findOne(id);
+      const category = await service.findSpecificAuto(id);
+      res.json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.get('/soliVuelo/:id',
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const category = await service.findSpecificVuelo(id);
       res.json(category);
     } catch (error) {
       next(error);

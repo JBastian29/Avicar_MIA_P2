@@ -7,10 +7,12 @@ const {logErrors, errorHandler, boomErrorHandler, ormErrorHandler} = require('./
 
 
 const app = express();
-const port = process.env.PORT || 3000;
-
+const port = process.env.PORT || 5000;
 app.use(express.json());
-const whitelist = ['http://localhost:8080', 'https://myapp.co'];
+app.use(express.urlencoded({extended : true}));
+
+
+const whitelist = ['http://localhost:3000', 'https://myapp.co'];
 const options = {
   origin:(origin,callback)=>{
     if(whitelist.includes(origin) || !origin){
@@ -26,6 +28,7 @@ app.use(fileUpload({
   useTempFiles: true,
   tempFileDir: './uploads'
 }))
+
 
 app.get('/', (req, res) => {
   res.send('Hola mi server en express');

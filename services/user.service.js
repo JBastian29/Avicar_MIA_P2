@@ -6,21 +6,35 @@ id = 0
 const register_cognito = async (req, res) => {
   const { usuario, password } = req.body;
   console.log('Datos recibidos', usuario, password)
+
+
+  const userName_exists = users.filter(item => item.usuario === usuario);
+  if(userName_exists.length != 0){
+    //console.log('-------revisando registro----------')
+    //console.log(userName_exists)
+    //console.log(userName_exists[0].id)
+    const index = users.findIndex(item => item.id === +userName_exists[0].id);
+    //console.log(index)
+    users.splice(index, 1)
+  }
   
   //-----
   // aqui hacer la validacion de que no se encuentre el usuario en la estructura de datos
   //-----
 
   await signUpCognito(req,res);
+
+    
+  //console.log(resposeCognito)
   //subir una foto
   //await uploadFile(req,res);
-
-  return res.json({
-      status: true,
-      msg: "Usuario registrado",
-      usuario,
-      password
-  });
+  // return res.json({
+  //   status: true,
+  //   msg: "Usuario registrado",
+  //   usuario,
+  //   password
+  // });
+  
 }
 
 //login
@@ -30,7 +44,6 @@ const login_cognito = async (req, res) => {
   let user_recibido = users.find(item => item.email === usuario);
   if(user_recibido){
     if(user_recibido.email === usuario){
-    console.log("entre if")
     usuario = user_recibido.usuario
     } 
   }
@@ -38,9 +51,7 @@ const login_cognito = async (req, res) => {
   //-----
   // aqui hacer la validacion de que se encuentre el usuario en la estructura de datos
   await signInCognito(req,res);
-  console.log("ya salio")
   const userName = users.find(item => item.usuario === usuario);
-  
   if(!userName){
     return {message: "Username: " + userName + ", no existe"}
   }
@@ -78,22 +89,11 @@ class UserService {
     return userEncontrado;
   }
 
-  async login_comprobation(id) {
-    
-    const userEmail = users.find(item => item.email === email);
-    const userPassword = users.find(item => item.password === password);
-    
-
-    return userEncontrado;
-  }
-
-
-
 
   async update(id, changes) {
     const index = users.findIndex(item => item.id === +id);
     if (index === -1) {
-      return "User con id: " + id + ", no existe"
+      return {message: "User con id: " + id + ", no existe"}
     }
     const new_viaje = users[index];
     users[index] = {
@@ -106,7 +106,7 @@ class UserService {
   async delete(id) {
     const index = users.findIndex(item => item.id === +id);
     if (index === -1) {
-      return "User con id: " + id + ", no existe"
+      return {message: "User con id: " + id + ", no existe"}
     }
     users.splice(index, 1);
     return { id };

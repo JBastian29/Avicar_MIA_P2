@@ -11,7 +11,7 @@ router.get('/', async (req,res)=>{
 })
 
 router.post('/', async (req,res)=>{
-    const body = req.body;
+      const body = req.body;
       const newViajes = await service.create(body);
       res.status(201).json(newViajes);
 })
@@ -41,6 +41,7 @@ router.delete('/:id',
 async (req, res, next) => {
       const { id } = req.params;
       await service.delete(id);
+      console.log('ya elimine')
       res.status(201).json({id});
   }
 );

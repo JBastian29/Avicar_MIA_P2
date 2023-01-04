@@ -1,7 +1,8 @@
 const { S3Client, PutObjectCommand, ListObjectsCommand, GetObjectCommand } = require('@aws-sdk/client-s3')
 //import { AWS_BUCKET_REGION, AWS_PUBLIC_KEY, AWS_SECRET_KEY, AWS_BUCKET_NAME } from './config.js'
 const fs = require('fs')
-const {getSignedUrl}  = require('@aws-sdk/s3-request-presigner')
+const {getSignedUrl}  = require('@aws-sdk/s3-request-presigner');
+const { link } = require('joi');
 require('dotenv').config();
 
 const client = new S3Client({
@@ -13,6 +14,7 @@ const client = new S3Client({
 })
 
 async function uploadFile(file) {
+    
     const stream = fs.createReadStream(file.tempFilePath)
     const uploadParams = {
         Bucket: process.env.AWS_BUCKET_NAME,
@@ -49,11 +51,17 @@ async function downloadFile(filename) {
 }
 
 async function getFileURL(filename) {
+    //console.log(filename)
     const command = new GetObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: filename
     })
-    return await getSignedUrl(client, command, { expiresIn: 3600 })
+    const link_url = await getSignedUrl(client, command, { expiresIn: 18000 })
+    return link_url
+    //console.log(link_url)
+    // res.json({
+    //     url:link_url
+    // }) 
 }
 
 module.exports = {

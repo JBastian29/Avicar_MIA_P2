@@ -17,11 +17,17 @@ const signUpCognito = async(req, res) => {
     const username=usuario;
     userPool.signUp(username, password, attributeList, null, async(err, data)=>{
         if(err){
-            console.log(err);
-            res.status(500).send
+            console.log(err)
+            // res.status(500).send
+            res.status(400).json({message:err.message})
         }else{
             console.log(data)
-            // res.status(200).send(data);
+            res.status(200).json({
+                status: true,
+                msg: "Usuario registrado",
+                usuario,
+                password
+              });
         }
     });
 }

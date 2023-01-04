@@ -22,7 +22,7 @@ class ViajesService {
   async findOne(id) {
     const viajeEncontrado = this.viajes.find(item => item.id === +id);
     if (!viajeEncontrado) {
-      throw boom.notFound('product not found');
+      return {message: "Viaje con id: " + id + ", no existe"}
     }
     return viajeEncontrado;
   }
@@ -30,7 +30,7 @@ class ViajesService {
   async update(id, changes) {
     const index = this.viajes.findIndex(item => item.id === +id);
     if (index === -1) {
-      return "Viaje con id: " + id + ", no existe"
+      return {message: "Viaje con id: " + id + ", no existe"}
     }
     const new_viaje = this.viajes[index];
     this.viajes[index] = {
@@ -43,7 +43,7 @@ class ViajesService {
   async delete(id) {
     const index = this.viajes.findIndex(item => item.id === +id);
     if (index === -1) {
-      return "Viaje con id: " + id + ", no existe"
+      return {message: "Viaje con id: " + id + ", no existe"}
     }
     this.viajes.splice(index, 1);
     return { id };
