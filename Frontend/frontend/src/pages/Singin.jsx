@@ -12,6 +12,7 @@ import { Alert } from '@mui/material';
 const Singin = () => {
 
     const navigate = useNavigate();
+    const ruta_AWS = 'http://54.211.162.113:5000'
 
     const handleNavigate = () => {
         navigate("/login");
@@ -60,7 +61,7 @@ const Singin = () => {
         }
         console.log(formData.get('user_type'));
 
-        const endpoint = await fetch('http://localhost:5000/api/users/registro', {
+        const endpoint = await fetch(ruta_AWS+'/api/users/registro', {
             method: "POST",
             body:formData
         });

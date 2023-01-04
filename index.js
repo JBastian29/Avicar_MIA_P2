@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 
 
-const whitelist = ['http://localhost:3000', 'https://myapp.co'];
+const whitelist = ['http://localhost:3000', 'https://myapp.co', 'http://54.211.162.113:5000','http://52.90.137.80:3000'];
 const options = {
   origin:(origin,callback)=>{
     if(whitelist.includes(origin) || !origin){
@@ -22,7 +22,7 @@ const options = {
     }
   }
 }
-app.use(cors(options));
+app.use(cors());
 
 app.use(fileUpload({
   useTempFiles: true,

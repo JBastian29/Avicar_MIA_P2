@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+
+  frontend:
+    image: 'lordbastian29/frontend-miap2'
+    container_name: 'frontend-NodeJS'
+    ports:
+      - '3000:3000' #del no de hub al mio
+    restart: always

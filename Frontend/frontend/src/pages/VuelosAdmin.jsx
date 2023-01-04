@@ -8,6 +8,7 @@ const VuelosAdmin = () => {
 
 
     useEffect(() => {getVuelos()}, [] );
+    const ruta_AWS = 'http://54.211.162.113:5000'
     
     const [clickedRow, setClickedRow] = useState();
     const [rows,setRows] = useState([]);
@@ -55,7 +56,7 @@ const VuelosAdmin = () => {
 
 
       const getVuelos = async () =>{
-        const endpoint_get = await fetch('http://localhost:5000/api/viajes', {
+        const endpoint_get = await fetch(ruta_AWS+'/api/viajes', {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -67,7 +68,7 @@ const VuelosAdmin = () => {
         setClickedRow(row);
         console.log('.........................')
         console.log(row)
-        const endpoint_delete = await fetch(`http://localhost:5000/api/viajes/${row.id}`, {
+        const endpoint_delete = await fetch(ruta_AWS+`/api/viajes/${row.id}`, {
             method: "DELETE"
         });
         
@@ -87,7 +88,7 @@ const VuelosAdmin = () => {
         formdata.append("ciudad_destino",vuelo.ciudad_destino);
         formdata.append("dias_vuelo",vuelo.dias_vuelo);
         formdata.append("precio_vuelo",vuelo.precio_vuelo);
-        const endpoint_post = await fetch('http://localhost:5000/api/viajes', {
+        const endpoint_post = await fetch(ruta_AWS+'/api/viajes', {
             method: "POST",
             body:formdata
         });

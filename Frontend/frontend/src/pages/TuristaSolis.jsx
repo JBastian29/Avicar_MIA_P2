@@ -8,6 +8,7 @@ import { TrendingUpOutlined } from '@mui/icons-material';
 
 const TuristaSolis = () => {
     //const { logIn, getNombre } = useContext(AppEnvr)
+    const ruta_AWS = 'http://54.211.162.113:5000'
     const cookies = new Cookies();
     const usuario_logeado = cookies.get('session');
     const link_image = usuario_logeado?.usuario_logeado.foto_perfil
@@ -53,7 +54,7 @@ const TuristaSolis = () => {
 
 
       const getSolisVuelo = async () =>{
-        const endpoint_get = await fetch(`http://localhost:5000/api/solicitudes/soliVuelo/${usuario_logeado.usuario_logeado.id}`, {
+        const endpoint_get = await fetch(ruta_AWS+`/api/solicitudes/soliVuelo/${usuario_logeado.usuario_logeado.id}`, {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -62,7 +63,7 @@ const TuristaSolis = () => {
       }
 
       const getSolisAuto = async () =>{
-        const endpoint_get = await fetch(`http://localhost:5000/api/solicitudes/soliAuto/${usuario_logeado.usuario_logeado.id}`, {
+        const endpoint_get = await fetch(ruta_AWS+`/api/solicitudes/soliAuto/${usuario_logeado.usuario_logeado.id}`, {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();

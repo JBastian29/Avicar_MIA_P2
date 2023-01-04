@@ -8,6 +8,7 @@ const AutosAdmin = () => {
 
 
     useEffect(() => {getVuelos()}, [] );
+    const ruta_AWS = 'http://54.211.162.113:5000'
     
     const [clickedRow, setClickedRow] = useState();
     const [rows,setRows] = useState([]);
@@ -57,7 +58,7 @@ const AutosAdmin = () => {
 
 
       const getVuelos = async () =>{
-        const endpoint_get = await fetch('http://localhost:5000/api/autos', {
+        const endpoint_get = await fetch(ruta_AWS+'/api/autos', {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -67,7 +68,7 @@ const AutosAdmin = () => {
       const onButtonClick = async (e,row) =>{
         e.preventDefault()
         setClickedRow(row);
-        const endpoint_delete = await fetch(`http://localhost:5000/api/autos/${row.id}`, {
+        const endpoint_delete = await fetch(ruta_AWS+`/api/autos/${row.id}`, {
             method: "DELETE"
         });
         
@@ -88,7 +89,7 @@ const AutosAdmin = () => {
         formdata.append("modelo",vuelo.modelo);
         formdata.append("precio",vuelo.precio);
         formdata.append("ciudad_localizado",vuelo.ciudad_localizado);
-        const endpoint_post = await fetch('http://localhost:5000/api/autos', {
+        const endpoint_post = await fetch(ruta_AWS+'/api/autos', {
             method: "POST",
             body:formdata
         });

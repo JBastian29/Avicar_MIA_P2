@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 
 const UsersAdmin = () => {
 
-
+    const ruta_AWS = 'http://54.211.162.113:5000'
     useEffect(() => {getVuelos()}, [] );
     const [value, setValue] = useState(false);
     const [error, setError] = useState(null);
@@ -75,7 +75,7 @@ const UsersAdmin = () => {
 
 
       const getVuelos = async () =>{
-        const endpoint_get = await fetch('http://localhost:5000/api/users', {
+        const endpoint_get = await fetch(ruta_AWS+'/api/users', {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -87,7 +87,7 @@ const UsersAdmin = () => {
         setClickedRow(row);
         console.log('.........................')
         console.log(row)
-        const endpoint_delete = await fetch(`http://localhost:5000/api/users/${row.id}`, {
+        const endpoint_delete = await fetch(ruta_AWS+`/api/users/${row.id}`, {
             method: "DELETE"
         });
         
@@ -105,7 +105,7 @@ const UsersAdmin = () => {
         formData.append("pass_confirm",user.pass_confirm);
         formData.append("user_type",user.user_type);
 
-        const endpoint = await fetch('http://localhost:5000/api/users/registro', {
+        const endpoint = await fetch(ruta_AWS+'/api/users/registro', {
             method: "POST",
             body:formData
         });

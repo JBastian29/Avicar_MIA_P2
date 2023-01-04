@@ -9,7 +9,7 @@ const Login = () => {
 
     // const displ = useRef(null);
     // const [userV, setUserV] = useState(true)
-
+    const ruta_AWS = 'http://54.211.162.113:5000'
 
     const [error, setError] = useState(null);
     const form = useRef();
@@ -67,7 +67,7 @@ const Login = () => {
         //   password: formdata.get("password"),
         // };
     
-        const endpoint = await fetch('http://localhost:5000/api/users/login', {
+        const endpoint = await fetch(ruta_AWS+'/api/users/login', {
             method: "POST",
             body:formdata
             // headers: {

@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 
 const Home2 = () => {
     //const { logIn, getNombre } = useContext(AppEnvr)
+    const ruta_AWS = 'http://54.211.162.113:5000'
     const cookies = new Cookies();
     const usuario_logeado = cookies.get('session');
     const link_image = usuario_logeado?.usuario_logeado.foto_perfil
@@ -88,7 +89,7 @@ const Home2 = () => {
       ];
 
       const getVuelos = async () =>{
-        const endpoint_get = await fetch('http://localhost:5000/api/viajes', {
+        const endpoint_get = await fetch(ruta_AWS+'/api/viajes', {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -96,7 +97,7 @@ const Home2 = () => {
       }
 
       const getAutos = async () =>{
-        const endpoint_get = await fetch('http://localhost:5000/api/autos', {
+        const endpoint_get = await fetch(ruta_AWS+'/api/autos', {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -123,7 +124,7 @@ const Home2 = () => {
           estado_solicitud: servicio.estado_solicitud
         }
         
-        const endpoint = await fetch('http://localhost:5000/api/solicitudes', {
+        const endpoint = await fetch(ruta_AWS+'/api/solicitudes', {
             method: "POST",
             headers: {
                   "Content-Type": "application/json",
@@ -161,7 +162,7 @@ const Home2 = () => {
           estado_solicitud: servicio.estado_solicitud
         }
 
-        const endpoint = await fetch('http://localhost:5000/api/solicitudes', {
+        const endpoint = await fetch(ruta_AWS+'/api/solicitudes', {
           method: "POST",
           headers: {
                 "Content-Type": "application/json",

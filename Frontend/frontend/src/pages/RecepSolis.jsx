@@ -8,6 +8,7 @@ import { TrendingUpOutlined } from '@mui/icons-material';
 
 const RecepSolis = () => {
     //const { logIn, getNombre } = useContext(AppEnvr)
+    const ruta_AWS = 'http://54.211.162.113:5000'
     const cookies = new Cookies();
     const usuario_logeado = cookies.get('session');
     const link_image = usuario_logeado?.usuario_logeado.foto_perfil
@@ -77,7 +78,7 @@ const RecepSolis = () => {
 
 
       const getSolis = async () =>{
-        const endpoint_get = await fetch('http://localhost:5000/api/solicitudes', {
+        const endpoint_get = await fetch(ruta_AWS+'/api/solicitudes', {
             method: "GET"
         });
         const resp_get = await endpoint_get.json();
@@ -95,7 +96,7 @@ const RecepSolis = () => {
         // formdata.append("solicitante",servicio.solicitante);
         formdata.append("estado_solicitud",true);
         
-        const endpoint = await fetch(`http://localhost:5000/api/solicitudes/${row.id}`, {
+        const endpoint = await fetch(ruta_AWS+`/api/solicitudes/${row.id}`, {
             method: "PATCH",
             body:formdata
         });
@@ -121,7 +122,7 @@ const RecepSolis = () => {
         // formdata.append("solicitante",servicio.solicitante);
         formdata.append("estado_solicitud",false);
         
-        const endpoint = await fetch(`http://localhost:5000/api/solicitudes/${row.id}`, {
+        const endpoint = await fetch(ruta_AWS+`/api/solicitudes/${row.id}`, {
             method: "PATCH",
             body:formdata
         });
